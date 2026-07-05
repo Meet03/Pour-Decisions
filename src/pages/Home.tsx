@@ -1,95 +1,80 @@
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { motion } from 'framer-motion'
-import { Trophy } from 'lucide-react'
+import { ArrowRight, Crown, UserPlus } from 'lucide-react'
+import GameRow from '../components/GameRow'
 import Leaderboard from '../components/Leaderboard'
-import PlayerManager from '../components/PlayerManager'
 import { games } from '../data/games'
+import { gameCategories } from '../data/categories'
 import { useGame } from '../context/GameContext'
-
-const colorGlow: Record<string, string> = {
-  cyan: 'hover:shadow-cyan/25 hover:border-cyan/50',
-  pink: 'hover:shadow-pink/25 hover:border-pink/50',
-  amber: 'hover:shadow-amber/25 hover:border-amber/50',
-  lime: 'hover:shadow-lime/25 hover:border-lime/50',
-  flame: 'hover:shadow-flame/25 hover:border-flame/50',
-}
+import { useScore } from '../context/ScoreContext'
 
 export default function Home() {
   const { players } = useGame()
+  const { getPoints } = useScore()
   const [showBoard, setShowBoard] = useState(false)
 
+  const leader = players.length > 0 ? [...players].sort((a, b) => getPoints(b) - getPoints(a))[0] : null
+  const leaderPts = leader ? getPoints(leader) : 0
+
   return (
-    <div className="mx-auto min-h-dvh w-full max-w-lg px-4 pb-10 pt-10">
-      <motion.header
+    <div className="mx-auto min-h-dvh w-full max-w-lg pb-28 pt-8">
+      {/* Banner */}
+      <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5 }}
-        className="relative text-center"
+        className="mx-4 rounded-3xl border border-white/10 bg-gradient-to-br from-night-card to-night-soft p-6 text-center shadow-xl shadow-black/30"
       >
-        <button
-          onClick={() => setShowBoard(true)}
-          aria-label="Show leaderboard"
-          className="absolute right-0 top-0 flex h-11 w-11 items-center justify-center rounded-full bg-white/10 transition-colors hover:bg-white/20"
-        >
-          <Trophy className="h-5 w-5 text-amber" />
-        </button>
-        <div className="animate-float text-6xl">🍹</div>
-        <h1 className="mt-2 text-4xl font-extrabold tracking-tight">
+        <div className="animate-float text-5xl">🍹</div>
+        <h1 className="mt-2 text-3xl font-extrabold tracking-tight">
           Pour <span className="text-pink">Decisions</span>
         </h1>
-        <p className="mt-2 text-white/50">
-          Party games, zero downloads. Add your crew, pick a game, pass the phone.
-        </p>
-      </motion.header>
+
+        {players.length === 0 ? (
+          <Link
+            to="/players"
+            className="mt-4 inline-flex items-center gap-2 rounded-full bg-pink px-6 py-3 font-extrabold text-white shadow-lg shadow-pink/30 active:scale-95"
+          >
+            <UserPlus className="h-4 w-4" /> Add your crew <ArrowRight className="h-4 w-4" />
+          </Link>
+        ) : leaderPts > 0 ? (
+          <button
+            onClick={() => setShowBoard(true)}
+            className="mt-4 inline-flex items-center gap-2 rounded-full bg-white/10 px-5 py-2.5 text-sm font-bold hover:bg-white/15"
+          >
+            <Crown className="h-4 w-4 text-amber" /> {leader} leads with {leaderPts} pts
+          </button>
+        ) : (
+          <p className="mt-3 text-sm text-white/50">
+            {players.length} player{players.length === 1 ? '' : 's'} ready — pick a game below 👇
+          </p>
+        )}
+      </motion.div>
+
+      {/* Game rows */}
+      <div className="mt-8">
+        {gameCategories.map((cat, i) => (
+          <motion.div
+            key={cat.title}
+            initial={{ opacity: 0, y: 16 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.4, delay: 0.1 + i * 0.08 }}
+          >
+            <GameRow
+              title={cat.title}
+              emoji={cat.emoji}
+              games={cat.slugs.map((slug) => games.find((g) => g.slug === slug)).filter((g) => g !== undefined)}
+            />
+          </motion.div>
+        ))}
+      </div>
+
+      <p className="mt-2 px-4 text-center text-xs text-white/25">
+        Drink responsibly. Never drink and drive. 🚕
+      </p>
 
       <Leaderboard open={showBoard} onClose={() => setShowBoard(false)} />
-
-      <motion.section
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.5, delay: 0.1 }}
-        className="mt-8"
-        aria-label="Players"
-      >
-        <h2 className="mb-2 text-sm font-bold uppercase tracking-widest text-white/40">
-          Who's playing?{' '}
-          {players.length > 0 && <span className="text-pink">({players.length})</span>}
-        </h2>
-        <PlayerManager />
-      </motion.section>
-
-      <section className="mt-8" aria-label="Games">
-        <h2 className="mb-3 text-sm font-bold uppercase tracking-widest text-white/40">
-          Pick a game
-        </h2>
-        <div className="grid grid-cols-2 gap-3">
-          {games.map((g, i) => (
-            <motion.div
-              key={g.slug}
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.4, delay: 0.15 + i * 0.06 }}
-            >
-              <Link
-                to={`/${g.slug}`}
-                className={`flex h-full flex-col rounded-3xl border border-white/10 bg-night-card p-5 shadow-xl shadow-black/30 transition-all hover:-translate-y-1 hover:shadow-2xl ${colorGlow[g.color]}`}
-              >
-                <span className="text-4xl">{g.emoji}</span>
-                <span className="mt-3 text-lg font-bold leading-tight">{g.title}</span>
-                <span className="mt-1 text-sm text-white/45">{g.tagline}</span>
-              </Link>
-            </motion.div>
-          ))}
-        </div>
-      </section>
-
-      <footer className="mt-10 text-center text-xs leading-relaxed text-white/30">
-        <p>Drink responsibly. Never drink and drive. 🚕</p>
-        <p className="mt-1">
-          No account. No downloads. Free forever — share the link, spread the chaos.
-        </p>
-      </footer>
     </div>
   )
 }

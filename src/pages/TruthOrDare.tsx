@@ -1,9 +1,11 @@
 import { useMemo, useState } from 'react'
 import { AnimatePresence, motion } from 'framer-motion'
 import GameShell from '../components/GameShell'
+import HoloCard from '../components/HoloCard'
 import TierPicker from '../components/TierPicker'
 import { dares, truths } from '../data/truthOrDare'
 import type { Tier } from '../data/tiers'
+import { rarityByTier } from '../data/rarity'
 import { useGame } from '../context/GameContext'
 import { useScore } from '../context/ScoreContext'
 
@@ -78,16 +80,18 @@ export default function TruthOrDare() {
               transition={{ duration: 0.25 }}
               className="mt-5 flex flex-1 flex-col"
             >
-              <div className="flex min-h-[260px] flex-1 flex-col items-center justify-center rounded-3xl border border-white/10 bg-night-card p-8 text-center shadow-2xl shadow-black/40">
-                <span
-                  className={`rounded-full px-4 py-1 text-xs font-extrabold uppercase tracking-widest ${
-                    card.kind === 'truth' ? 'bg-cyan/15 text-cyan' : 'bg-flame/15 text-flame'
-                  }`}
-                >
-                  {card.kind}
-                </span>
-                <p className="mt-5 text-2xl font-bold leading-snug text-balance">{card.text}</p>
-              </div>
+              <HoloCard rarity={rarityByTier[tier]} className="flex min-h-[260px] flex-1 flex-col items-center justify-center p-8 text-center">
+                <div className="relative z-[2] flex flex-col items-center">
+                  <span
+                    className={`rounded-full px-4 py-1 text-xs font-extrabold uppercase tracking-widest ${
+                      card.kind === 'truth' ? 'bg-cyan/15 text-cyan' : 'bg-flame/15 text-flame'
+                    }`}
+                  >
+                    {card.kind}
+                  </span>
+                  <p className="mt-5 text-2xl font-bold leading-snug text-balance">{card.text}</p>
+                </div>
+              </HoloCard>
               <div className="mt-4 grid grid-cols-2 gap-3">
                 <button
                   onClick={() => draw(card.kind)}

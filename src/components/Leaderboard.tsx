@@ -3,6 +3,7 @@ import { RotateCcw, Trophy, Users, X } from 'lucide-react'
 import { useGame } from '../context/GameContext'
 import { useScore } from '../context/ScoreContext'
 import { badgesFor } from '../data/achievements'
+import { xpProgress } from '../data/xp'
 
 interface LeaderboardProps {
   open: boolean
@@ -86,42 +87,55 @@ export default function Leaderboard({ open, onClose }: LeaderboardProps) {
               <ul className="mt-5 space-y-2.5">
                 {ranked.map((p, i) => {
                   const badges = badgesFor(getStats(p))
+                  const xp = xpProgress(getPoints(p))
                   return (
-                    <li
-                      key={p}
-                      className="flex items-center gap-3 rounded-2xl bg-white/5 px-4 py-3"
-                    >
-                      <span className="w-6 text-center text-lg font-extrabold text-white/30">
-                        {i === 0 ? '🥇' : i === 1 ? '🥈' : i === 2 ? '🥉' : i + 1}
-                      </span>
-                      <div className="min-w-0 flex-1">
-                        <p className="truncate font-bold">{p}</p>
-                        {badges.length > 0 && (
-                          <p className="mt-0.5 text-xs text-white/40">
-                            {badges.map((b) => `${b.emoji} ${b.label}`).join('  ·  ')}
-                          </p>
-                        )}
-                      </div>
-                      {teamMode && (
-                        <div className="flex shrink-0 gap-1">
-                          {(['A', 'B'] as const).map((t) => (
-                            <button
-                              key={t}
-                              onClick={() => setTeam(p, t)}
-                              className={`h-7 w-7 rounded-full text-xs font-extrabold transition-colors ${
-                                teams[p] === t
-                                  ? t === 'A'
-                                    ? 'bg-cyan text-night'
-                                    : 'bg-pink text-white'
-                                  : 'bg-white/10 text-white/40'
-                              }`}
-                            >
-                              {t}
-                            </button>
-                          ))}
+                    <li key={p} className="rounded-2xl bg-white/5 px-4 py-3">
+                      <div className="flex items-center gap-3">
+                        <span className="w-6 shrink-0 text-center text-lg font-extrabold text-white/30">
+                          {i === 0 ? '🥇' : i === 1 ? '🥈' : i === 2 ? '🥉' : i + 1}
+                        </span>
+                        <div className="min-w-0 flex-1">
+                          <div className="flex items-center gap-2">
+                            <p className="truncate font-bold">{p}</p>
+                            <span className="shrink-0 rounded-full bg-cyan/15 px-2 py-0.5 text-[10px] font-extrabold uppercase tracking-wide text-cyan">
+                              Lv.{xp.level}
+                            </span>
+                          </div>
+                          {badges.length > 0 && (
+                            <p className="mt-0.5 truncate text-xs text-white/40">
+                              {badges.map((b) => `${b.emoji} ${b.label}`).join('  ·  ')}
+                            </p>
+                          )}
                         </div>
-                      )}
-                      <span className="shrink-0 text-lg font-extrabold text-amber">{getPoints(p)}</span>
+                        {teamMode && (
+                          <div className="flex shrink-0 gap-1">
+                            {(['A', 'B'] as const).map((t) => (
+                              <button
+                                key={t}
+                                onClick={() => setTeam(p, t)}
+                                className={`h-7 w-7 rounded-full text-xs font-extrabold transition-colors ${
+                                  teams[p] === t
+                                    ? t === 'A'
+                                      ? 'bg-cyan text-night'
+                                      : 'bg-pink text-white'
+                                    : 'bg-white/10 text-white/40'
+                                }`}
+                              >
+                                {t}
+                              </button>
+                            ))}
+                          </div>
+                        )}
+                        <span className="shrink-0 text-lg font-extrabold text-amber">{getPoints(p)}</span>
+                      </div>
+                      <div className="mt-2 flex items-center gap-2 pl-9">
+                        <div className="xp-bar flex-1">
+                          <div className="xp-bar-fill" style={{ width: `${(xp.into / xp.total) * 100}%` }} />
+                        </div>
+                        <span className="shrink-0 text-[10px] font-bold text-white/30">
+                          {xp.into}/{xp.total} XP
+                        </span>
+                      </div>
                     </li>
                   )
                 })}

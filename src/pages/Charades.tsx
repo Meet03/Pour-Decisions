@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from 'react'
 import { AnimatePresence, motion } from 'framer-motion'
 import GameShell from '../components/GameShell'
+import HoloCard from '../components/HoloCard'
 import { charadeMovies, type CharadeLang } from '../data/charades'
 import { useGame } from '../context/GameContext'
 import { useScore } from '../context/ScoreContext'
@@ -183,15 +184,20 @@ export default function Charades() {
               <span>✅ {correct}</span>
             </div>
 
-            <div className="mt-4 flex min-h-[200px] w-full flex-col items-center justify-center rounded-3xl border border-white/10 bg-night-card p-6 text-center">
-              <span className="rounded-full bg-white/10 px-3 py-1 text-xs font-bold uppercase tracking-widest text-lime">
-                {currentMovie.lang === 'hindi' ? '🇮🇳 Hindi' : '🇬🇧 English'} · {wordCount(currentMovie.title)}{' '}
-                word{wordCount(currentMovie.title) === 1 ? '' : 's'}
-              </span>
-              <p className="mt-4 text-2xl font-extrabold leading-snug text-balance">
-                {currentMovie.title}
-              </p>
-            </div>
+            <HoloCard
+              rarity={currentMovie.lang === 'hindi' ? 'rare' : 'uncommon'}
+              className="mt-4 flex min-h-[200px] w-full flex-col items-center justify-center p-6 text-center"
+            >
+              <div className="relative z-[2] flex flex-col items-center">
+                <span className="rounded-full bg-white/10 px-3 py-1 text-xs font-bold uppercase tracking-widest text-lime">
+                  {currentMovie.lang === 'hindi' ? '🇮🇳 Hindi' : '🇬🇧 English'} · {wordCount(currentMovie.title)}{' '}
+                  word{wordCount(currentMovie.title) === 1 ? '' : 's'}
+                </span>
+                <p className="mt-4 text-2xl font-extrabold leading-snug text-balance">
+                  {currentMovie.title}
+                </p>
+              </div>
+            </HoloCard>
 
             <div className="mt-5 grid w-full grid-cols-2 gap-3">
               <button

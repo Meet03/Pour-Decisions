@@ -1,7 +1,16 @@
 import { createContext, useContext, useEffect, useState, type ReactNode } from 'react'
-import { emptyStats, type PlayerStats } from '../data/achievements'
+import { badgesFor, emptyStats, type PlayerStats } from '../data/achievements'
+import { levelFor } from '../data/xp'
 
 export type Team = 'A' | 'B'
+
+export interface GameEvent {
+  id: string
+  type: 'level' | 'badge'
+  player: string
+  label: string
+  emoji: string
+}
 
 interface ScoreState {
   points: Record<string, number>
@@ -17,6 +26,7 @@ interface ScoreState {
   getPoints: (player: string) => number
   getStats: (player: string) => PlayerStats
   teamTotals: () => Record<Team, number>
+  lastEvent: GameEvent | null
 }
 
 const ScoreContext = createContext<ScoreState | null>(null)
@@ -35,6 +45,7 @@ export function ScoreProvider({ children }: { children: ReactNode }) {
   const [stats, setStats] = useState<Record<string, PlayerStats>>(() => load('pd-stats', {}))
   const [teams, setTeams] = useState<Record<string, Team>>(() => load('pd-teams', {}))
   const [teamMode, setTeamMode] = useState(() => load('pd-team-mode', false))
+  const [lastEvent, setLastEvent] = useState<GameEvent | null>(null)
 
   useEffect(() => localStorage.setItem('pd-points', JSON.stringify(points)), [points])
   useEffect(() => localStorage.setItem('pd-stats', JSON.stringify(stats)), [stats])
@@ -42,12 +53,39 @@ export function ScoreProvider({ children }: { children: ReactNode }) {
   useEffect(() => localStorage.setItem('pd-team-mode', JSON.stringify(teamMode)), [teamMode])
 
   const addPoints = (player: string, amount: number) =>
-    setPoints((p) => ({ ...p, [player]: (p[player] ?? 0) + amount }))
+    setPoints((p) => {
+      const before = p[player] ?? 0
+      const after = before + amount
+      const beforeLevel = levelFor(before)
+      const afterLevel = levelFor(after)
+      if (afterLevel > beforeLevel) {
+        setLastEvent({
+          id: `${Date.now()}-${Math.random()}`,
+          type: 'level',
+          player,
+          label: `Level ${afterLevel}`,
+          emoji: '⭐',
+        })
+      }
+      return { ...p, [player]: after }
+    })
 
   const bump = (player: string, statKey: keyof PlayerStats, amount = 1) =>
     setStats((s) => {
-      const current = s[player] ?? emptyStats()
-      return { ...s, [player]: { ...current, [statKey]: current[statKey] + amount } }
+      const before = s[player] ?? emptyStats()
+      const after = { ...before, [statKey]: before[statKey] + amount }
+      const beforeBadgeIds = new Set(badgesFor(before).map((b) => b.id))
+      const newBadge = badgesFor(after).find((b) => !beforeBadgeIds.has(b.id))
+      if (newBadge) {
+        setLastEvent({
+          id: `${Date.now()}-${Math.random()}`,
+          type: 'badge',
+          player,
+          label: newBadge.label,
+          emoji: newBadge.emoji,
+        })
+      }
+      return { ...s, [player]: after }
     })
 
   const award = (player: string, amount: number, statKey?: keyof PlayerStats) => {
@@ -90,6 +128,7 @@ export function ScoreProvider({ children }: { children: ReactNode }) {
         getPoints,
         getStats,
         teamTotals,
+        lastEvent,
       }}
     >
       {children}

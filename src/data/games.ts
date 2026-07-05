@@ -90,4 +90,12 @@ export const games: GameMeta[] = [
     color: 'pink',
     needsPlayers: true,
   },
+  {
+    slug: 'charades',
+    title: 'Dumb Charades',
+    emoji: '🎬',
+    tagline: 'Act it out, no talking!',
+    color: 'lime',
+    needsPlayers: true,
+  },
 ]

@@ -4,6 +4,7 @@ import PromptCard from '../components/PromptCard'
 import TierPicker from '../components/TierPicker'
 import { wouldYouRather } from '../data/wouldYouRather'
 import type { Tier } from '../data/tiers'
+import { rarityByTier } from '../data/rarity'
 import { penaltyText, useGame } from '../context/GameContext'
 import { useDeck } from '../hooks/useDeck'
 
@@ -20,7 +21,7 @@ export default function WouldYouRather() {
   return (
     <GameShell title="Would You Rather" emoji="🤔" slug="would-you-rather">
       <TierPicker value={tier} onChange={changeTier} />
-      <PromptCard cardKey={`${tier}-${count}`} onNext={next}>
+      <PromptCard cardKey={`${tier}-${count}`} onNext={next} rarity={rarityByTier[tier]}>
         <span className="text-sm font-bold uppercase tracking-widest text-white/40">
           Would you rather…
         </span>

@@ -100,4 +100,13 @@ export const howToPlay: Record<string, HowToPlayInfo> = {
     ],
     scoring: 'The player in the hot seat earns +1 point for every question they answer before time runs out.',
   },
+  charades: {
+    steps: [
+      'Pick Hindi, English, or Mixed movies.',
+      'The named player taps ready, then privately views the movie title — nobody else should look!',
+      'Start the 60-second clock and act out the title using gestures only — no talking, mouthing words, or spelling.',
+      'Tap "Got it!" when the group guesses correctly to move to the next title, or "Skip" if it\'s a lost cause.',
+    ],
+    scoring: 'The actor earns +2 for every movie the group correctly guesses. Nail 8 total across the night to unlock the 🎬 Charades Champ badge.',
+  },
 }
