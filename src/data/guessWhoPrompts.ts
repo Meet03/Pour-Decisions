@@ -1,0 +1,18 @@
+export const guessWhoPrompts: string[] = [
+  'What’s the worst pickup line you’ve ever used?',
+  'What’s the weirdest thing you’ve Googled this month?',
+  'What’s your most embarrassing childhood nickname?',
+  'What’s a lie you told that spiraled out of control?',
+  'What’s the pettiest thing you’ve ever done to win an argument?',
+  'What’s the most useless talent you have?',
+  'What’s a food combination you love but hide from others?',
+  'What’s the worst excuse you’ve given for being late?',
+  'What’s a rule you break every single time?',
+  'What’s the most dramatic thing you’ve done over something small?',
+  'What’s a secret talent nobody here knows about?',
+  'What’s the worst gift you’ve ever given someone?',
+  'What’s a childhood fear you still secretly have?',
+  'What’s the most trouble you got into as a kid?',
+  'What’s something you’re irrationally competitive about?',
+  'What’s the weirdest compliment you’ve ever received?',
+]

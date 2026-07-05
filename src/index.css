@@ -1,0 +1,47 @@
+@import '@fontsource/baloo-2/400.css';
+@import '@fontsource/baloo-2/500.css';
+@import '@fontsource/baloo-2/600.css';
+@import '@fontsource/baloo-2/700.css';
+@import '@fontsource/baloo-2/800.css';
+@import 'tailwindcss';
+
+@theme {
+  --font-sans: 'Baloo 2', ui-rounded, system-ui, sans-serif;
+
+  --color-night: #0b0114;
+  --color-night-soft: #160a26;
+  --color-night-card: #1e1033;
+
+  --color-pink: #ff2e7e;
+  --color-pink-soft: #ff6ba6;
+  --color-cyan: #22e6ff;
+  --color-lime: #b6ff3c;
+  --color-amber: #ffb020;
+  --color-flame: #ff5d3c;
+
+  --animate-float: float 6s ease-in-out infinite;
+
+  @keyframes float {
+    0%,
+    100% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-12px);
+    }
+  }
+}
+
+html {
+  background: var(--color-night);
+}
+
+body {
+  @apply font-sans bg-night text-white antialiased;
+  min-height: 100dvh;
+}
+
+::selection {
+  background: var(--color-pink);
+  color: white;
+}
