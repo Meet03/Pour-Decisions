@@ -39,16 +39,17 @@ export default function HoloCard({ children, rarity, className }: HoloCardProps)
       ref={ref}
       onMouseMove={onMove}
       onMouseLeave={onLeave}
-      className={`holo-card relative overflow-hidden rounded-3xl border border-white/10 bg-night-card shadow-2xl shadow-black/40 ${
+      className={`holo-card relative overflow-hidden rounded-3xl bg-night-card ${
         rarity === 'legendary' ? 'holo-pulse' : ''
       } ${className ?? ''}`}
       style={
         info
           ? {
-              boxShadow: `0 0 0 1.5px ${info.glow}55, 0 14px 44px -14px ${info.glow}88`,
+              border: `2.5px solid ${info.glow}`,
+              boxShadow: `6px 6px 0 ${info.glow}66`,
               background:
                 rarity === 'legendary'
-                  ? 'linear-gradient(135deg, rgba(255,176,32,0.14), rgba(196,0,255,0.10), rgba(34,230,255,0.12))'
+                  ? 'linear-gradient(135deg, rgba(255,176,32,0.16), rgba(196,0,255,0.12), rgba(34,230,255,0.14))'
                   : undefined,
             }
           : undefined
@@ -56,8 +57,8 @@ export default function HoloCard({ children, rarity, className }: HoloCardProps)
     >
       {info && RarityIcon && (
         <span
-          className="pointer-events-none absolute right-3 top-3 z-10 inline-flex items-center gap-1 rounded-full px-2.5 py-1 text-[10px] font-extrabold uppercase tracking-wider backdrop-blur-sm"
-          style={{ background: `${info.glow}26`, color: info.glow, border: `1px solid ${info.glow}66` }}
+          className="pointer-events-none absolute right-3 top-3 z-10 inline-flex rotate-3 items-center gap-1 rounded-full px-2.5 py-1 text-[10px] font-extrabold uppercase tracking-wider text-night"
+          style={{ background: info.glow, boxShadow: '2px 2px 0 rgba(5,0,13,0.9)' }}
         >
           <RarityIcon className="h-3 w-3" /> {info.label}
         </span>

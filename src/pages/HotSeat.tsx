@@ -1,8 +1,10 @@
 import { useEffect, useRef, useState } from 'react'
 import GameShell from '../components/GameShell'
+import PopNumber from '../components/PopNumber'
 import { hotSeatQuestions } from '../data/hotSeatQuestions'
 import { useGame } from '../context/GameContext'
 import { useScore } from '../context/ScoreContext'
+import { sfx } from '../lib/sound'
 
 const ROUND_SECONDS = 60
 
@@ -35,6 +37,7 @@ export default function HotSeat() {
         if (s <= 1) {
           window.clearInterval(intervalRef.current)
           setRunning(false)
+          sfx.buzzer()
           if (player) award(player, answered, undefined)
           return 0
         }
@@ -82,7 +85,9 @@ export default function HotSeat() {
           <span className="font-extrabold text-pink">{player}</span> is in the hot seat
         </p>
 
-        <p className="mt-4 text-5xl font-extrabold">{seconds}s</p>
+        <p className="mt-4 text-5xl font-extrabold">
+          <PopNumber value={seconds} />s
+        </p>
 
         {running ? (
           <>

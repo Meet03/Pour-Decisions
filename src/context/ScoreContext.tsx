@@ -1,6 +1,7 @@
 import { createContext, useContext, useEffect, useState, type ReactNode } from 'react'
 import { badgesFor, emptyStats, type PlayerStats } from '../data/achievements'
 import { levelFor } from '../data/xp'
+import { sfx } from '../lib/sound'
 
 export type Team = 'A' | 'B'
 
@@ -89,6 +90,7 @@ export function ScoreProvider({ children }: { children: ReactNode }) {
     })
 
   const award = (player: string, amount: number, statKey?: keyof PlayerStats) => {
+    if (amount > 0) sfx.points()
     addPoints(player, amount)
     if (statKey) bump(player, statKey)
   }

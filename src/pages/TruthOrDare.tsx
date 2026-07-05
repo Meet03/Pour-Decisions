@@ -8,6 +8,7 @@ import type { Tier } from '../data/tiers'
 import { rarityByTier } from '../data/rarity'
 import { useGame } from '../context/GameContext'
 import { useScore } from '../context/ScoreContext'
+import { sfx } from '../lib/sound'
 
 function pick(arr: string[], avoid?: string) {
   let item = arr[Math.floor(Math.random() * arr.length)]
@@ -30,6 +31,7 @@ export default function TruthOrDare() {
   )
 
   function draw(kind: 'truth' | 'dare') {
+    sfx.flip()
     const pool = kind === 'truth' ? truths[tier] : dares[tier]
     setCard({ kind, text: pick(pool, card?.text) })
   }

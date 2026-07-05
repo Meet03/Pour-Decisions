@@ -2,9 +2,11 @@ import { useEffect, useRef, useState } from 'react'
 import { AnimatePresence, motion } from 'framer-motion'
 import GameShell from '../components/GameShell'
 import HoloCard from '../components/HoloCard'
+import PopNumber from '../components/PopNumber'
 import { charadeMovies, type CharadeLang } from '../data/charades'
 import { useGame } from '../context/GameContext'
 import { useScore } from '../context/ScoreContext'
+import { sfx } from '../lib/sound'
 
 const ROUND_SECONDS = 60
 type LangFilter = CharadeLang | 'mixed'
@@ -52,6 +54,7 @@ export default function Charades() {
         if (s <= 1) {
           window.clearInterval(intervalRef.current)
           setRunning(false)
+          sfx.buzzer()
           setStage('done')
           return 0
         }
@@ -179,7 +182,9 @@ export default function Charades() {
             className="mt-4 flex flex-1 flex-col items-center"
           >
             <div className="flex items-center gap-3 text-sm font-bold text-white/50">
-              <span>⏱️ {seconds}s</span>
+              <span>
+                ⏱️ <PopNumber value={seconds} />s
+              </span>
               <span>·</span>
               <span>✅ {correct}</span>
             </div>

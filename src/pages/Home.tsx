@@ -21,32 +21,36 @@ export default function Home() {
     <div className="mx-auto min-h-dvh w-full max-w-lg pb-28 pt-8">
       {/* Banner */}
       <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
+        initial={{ opacity: 0, y: 20, rotate: -2 }}
+        animate={{ opacity: 1, y: 0, rotate: -1 }}
         transition={{ duration: 0.5 }}
-        className="mx-4 rounded-3xl border border-white/10 bg-gradient-to-br from-night-card to-night-soft p-6 text-center shadow-xl shadow-black/30"
+        className="sticker relative mx-4 rounded-3xl bg-pink p-6 text-center"
       >
-        <div className="animate-float text-5xl">🍹</div>
-        <h1 className="mt-2 text-3xl font-extrabold tracking-tight">
-          Pour <span className="text-pink">Decisions</span>
-        </h1>
+        <span className="doodle" style={{ top: '-14px', left: '6%', color: '#b6ff3c', fontSize: '26px' }} aria-hidden="true">
+          ✦
+        </span>
+        <span className="doodle" style={{ top: '10px', right: '5%', color: '#22e6ff', fontSize: '18px', animationDelay: '-3s' }} aria-hidden="true">
+          ✳
+        </span>
+        <div className="animate-float text-6xl drop-shadow-[3px_3px_0_rgba(5,0,13,0.85)]">🍹</div>
+        <h1 className="text-sticker mt-2 text-4xl font-extrabold tracking-tight">Pour Decisions</h1>
 
         {players.length === 0 ? (
           <Link
             to="/players"
-            className="mt-4 inline-flex items-center gap-2 rounded-full bg-pink px-6 py-3 font-extrabold text-white shadow-lg shadow-pink/30 active:scale-95"
+            className="sticker mt-5 inline-flex rotate-1 items-center gap-2 rounded-full bg-lime px-6 py-3 font-extrabold text-night"
           >
             <UserPlus className="h-4 w-4" /> Add your crew <ArrowRight className="h-4 w-4" />
           </Link>
         ) : leaderPts > 0 ? (
           <button
             onClick={() => setShowBoard(true)}
-            className="mt-4 inline-flex items-center gap-2 rounded-full bg-white/10 px-5 py-2.5 text-sm font-bold hover:bg-white/15"
+            className="sticker mt-5 inline-flex rotate-1 items-center gap-2 rounded-full bg-amber px-5 py-2.5 text-sm font-extrabold text-night"
           >
-            <Crown className="h-4 w-4 text-amber" /> {leader} leads with {leaderPts} pts
+            <Crown className="h-4 w-4" /> {leader} leads with {leaderPts} pts
           </button>
         ) : (
-          <p className="mt-3 text-sm text-white/50">
+          <p className="mt-3 text-sm font-bold text-night/70">
             {players.length} player{players.length === 1 ? '' : 's'} ready — pick a game below 👇
           </p>
         )}

@@ -2,6 +2,7 @@ import type { ReactNode } from 'react'
 import { AnimatePresence, motion } from 'framer-motion'
 import HoloCard from './HoloCard'
 import type { RarityId } from '../data/rarity'
+import { sfx } from '../lib/sound'
 
 interface PromptCardProps {
   /** Change this to animate in a new card */
@@ -27,7 +28,10 @@ export default function PromptCard({ cardKey, onNext, children, footer, rarity }
           >
             <HoloCard rarity={rarity} className="min-h-[320px] w-full">
               <button
-                onClick={onNext}
+                onClick={() => {
+                  sfx.flip()
+                  onNext()
+                }}
                 className="relative z-[2] flex h-full min-h-[320px] w-full cursor-pointer flex-col items-center justify-center p-8 text-center active:scale-[0.99]"
               >
                 {children}

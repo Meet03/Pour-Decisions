@@ -3,6 +3,7 @@ import { AnimatePresence, motion } from 'framer-motion'
 import { RotateCcw } from 'lucide-react'
 import GameShell from '../components/GameShell'
 import { kingsRules, suits } from '../data/kings'
+import { sfx } from '../lib/sound'
 
 interface Card {
   rank: string
@@ -33,6 +34,7 @@ export default function Kings() {
 
   function draw() {
     if (deck.length === 0) return
+    sfx.flip()
     const [top, ...rest] = deck
     setDrawn(top)
     setDeck(rest)

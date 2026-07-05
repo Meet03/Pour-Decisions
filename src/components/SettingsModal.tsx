@@ -1,7 +1,9 @@
+import { useState } from 'react'
 import { AnimatePresence, motion } from 'framer-motion'
-import { Beer, Dumbbell, RotateCcw, Settings2, Trash2, X } from 'lucide-react'
+import { Beer, Dumbbell, RotateCcw, Settings2, Trash2, Volume2, VolumeX, X } from 'lucide-react'
 import { useGame } from '../context/GameContext'
 import { useScore } from '../context/ScoreContext'
+import { isMuted, setMuted } from '../lib/sound'
 
 interface SettingsModalProps {
   open: boolean
@@ -11,6 +13,13 @@ interface SettingsModalProps {
 export default function SettingsModal({ open, onClose }: SettingsModalProps) {
   const { penaltyMode, togglePenaltyMode, players, removePlayer } = useGame()
   const { resetScores } = useScore()
+  const [muted, setMutedState] = useState(isMuted)
+
+  function toggleSound() {
+    const next = !muted
+    setMuted(next)
+    setMutedState(next)
+  }
 
   function clearAllPlayers() {
     ;[...players].forEach((p) => removePlayer(p))
@@ -61,6 +70,24 @@ export default function SettingsModal({ open, onClose }: SettingsModalProps) {
                   <Beer className="h-5 w-5 text-amber" />
                 ) : (
                   <Dumbbell className="h-5 w-5 text-lime" />
+                )}
+              </button>
+            </div>
+
+            <div className="mt-3 flex items-center justify-between rounded-2xl bg-white/5 p-4">
+              <div>
+                <p className="font-bold">Sound effects</p>
+                <p className="text-xs text-white/40">Taps, card flips, level-up fanfares</p>
+              </div>
+              <button
+                onClick={toggleSound}
+                aria-label={muted ? 'Unmute sound effects' : 'Mute sound effects'}
+                className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-white/10 hover:bg-white/20"
+              >
+                {muted ? (
+                  <VolumeX className="h-5 w-5 text-white/40" />
+                ) : (
+                  <Volume2 className="h-5 w-5 text-cyan" />
                 )}
               </button>
             </div>

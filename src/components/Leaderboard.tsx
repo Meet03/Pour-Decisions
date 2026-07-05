@@ -1,5 +1,6 @@
 import { AnimatePresence, motion } from 'framer-motion'
 import { RotateCcw, Trophy, Users, X } from 'lucide-react'
+import PopNumber from './PopNumber'
 import { useGame } from '../context/GameContext'
 import { useScore } from '../context/ScoreContext'
 import { badgesFor } from '../data/achievements'
@@ -126,7 +127,9 @@ export default function Leaderboard({ open, onClose }: LeaderboardProps) {
                             ))}
                           </div>
                         )}
-                        <span className="shrink-0 text-lg font-extrabold text-amber">{getPoints(p)}</span>
+                        <span className="shrink-0 text-lg font-extrabold text-amber">
+                          <PopNumber value={getPoints(p)} />
+                        </span>
                       </div>
                       <div className="mt-2 flex items-center gap-2 pl-9">
                         <div className="xp-bar flex-1">

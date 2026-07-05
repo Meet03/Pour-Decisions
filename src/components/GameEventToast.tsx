@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 import { AnimatePresence, motion } from 'framer-motion'
 import { useScore, type GameEvent } from '../context/ScoreContext'
 import ConfettiBurst from './ConfettiBurst'
+import { sfx } from '../lib/sound'
 
 export default function GameEventToast() {
   const { lastEvent } = useScore()
@@ -9,6 +10,7 @@ export default function GameEventToast() {
 
   useEffect(() => {
     if (!lastEvent) return
+    sfx.levelup()
     setVisible(lastEvent)
     const t = window.setTimeout(() => setVisible(null), 3000)
     return () => window.clearTimeout(t)

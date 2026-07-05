@@ -2,19 +2,19 @@ import { tiers, type Tier } from '../data/tiers'
 
 const tierStyles: Record<string, { active: string; idle: string }> = {
   cyan: {
-    active: 'bg-cyan text-night shadow-lg shadow-cyan/40',
+    active: 'sticker bg-cyan text-night -rotate-1',
     idle: 'bg-white/10 text-cyan hover:bg-white/15',
   },
   lime: {
-    active: 'bg-lime text-night shadow-lg shadow-lime/40',
+    active: 'sticker bg-lime text-night rotate-1',
     idle: 'bg-white/10 text-lime hover:bg-white/15',
   },
   pink: {
-    active: 'bg-pink text-white shadow-lg shadow-pink/40',
+    active: 'sticker bg-pink text-night -rotate-1',
     idle: 'bg-white/10 text-pink-soft hover:bg-white/15',
   },
   flame: {
-    active: 'bg-flame text-white shadow-lg shadow-flame/40',
+    active: 'sticker bg-flame text-night rotate-1',
     idle: 'bg-white/10 text-flame hover:bg-white/15',
   },
 }

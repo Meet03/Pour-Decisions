@@ -14,9 +14,9 @@ export default function GameRow({ title, emoji, games }: GameRowProps) {
       <h2 className="mb-2.5 px-4 text-xs font-bold uppercase tracking-widest text-white/40">
         {emoji} {title}
       </h2>
-      <div className="scrollbar-hide flex snap-x snap-mandatory gap-3 overflow-x-auto px-4 pb-1">
-        {games.map((g) => (
-          <GameTile key={g.slug} game={g} />
+      <div className="scrollbar-hide flex snap-x snap-mandatory gap-4 overflow-x-auto px-4 pb-3 pt-1.5">
+        {games.map((g, i) => (
+          <GameTile key={g.slug} game={g} index={i} />
         ))}
       </div>
     </section>

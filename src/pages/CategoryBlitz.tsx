@@ -1,9 +1,11 @@
 import { useEffect, useRef, useState } from 'react'
 import { RotateCcw } from 'lucide-react'
 import GameShell from '../components/GameShell'
+import PopNumber from '../components/PopNumber'
 import { blitzCategories, blitzLetters } from '../data/categoryBlitz'
 import { useGame } from '../context/GameContext'
 import { useScore } from '../context/ScoreContext'
+import { sfx } from '../lib/sound'
 
 const ROUND_SECONDS = 30
 
@@ -29,6 +31,7 @@ export default function CategoryBlitz() {
         if (s <= 1) {
           window.clearInterval(intervalRef.current)
           setRunning(false)
+          sfx.buzzer()
           return 0
         }
         return s - 1
@@ -79,7 +82,7 @@ export default function CategoryBlitz() {
             />
           </svg>
           <div className="absolute inset-0 flex items-center justify-center text-4xl font-extrabold">
-            {seconds}
+            <PopNumber value={seconds} />
           </div>
         </div>
 
