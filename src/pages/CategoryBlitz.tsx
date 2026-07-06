@@ -115,7 +115,7 @@ export default function CategoryBlitz() {
           {!running && seconds === ROUND_SECONDS && (
             <button
               onClick={start}
-              className="flex-1 rounded-full bg-pink py-4 text-lg font-extrabold text-white shadow-xl shadow-pink/30 active:scale-95"
+              className="flex-1 rounded-full bg-flame py-4 text-lg font-extrabold text-night shadow-xl shadow-flame/30 active:scale-95"
             >
               Start! ⏱️
             </button>

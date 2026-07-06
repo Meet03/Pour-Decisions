@@ -236,7 +236,7 @@ export default function Charades() {
             </p>
             <button
               onClick={finishTurn}
-              className="mt-8 rounded-full bg-pink px-8 py-4 text-lg font-extrabold text-white shadow-xl shadow-pink/30 active:scale-95"
+              className="mt-8 rounded-full bg-lime px-8 py-4 text-lg font-extrabold text-night shadow-xl shadow-lime/30 active:scale-95"
             >
               Next player →
             </button>

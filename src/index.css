@@ -12,12 +12,12 @@
   --color-night-soft: #160a26;
   --color-night-card: #1e1033;
 
-  --color-pink: #ff2e7e;
-  --color-pink-soft: #ff6ba6;
-  --color-cyan: #22e6ff;
-  --color-lime: #b6ff3c;
-  --color-amber: #ffb020;
-  --color-flame: #ff5d3c;
+  --color-pink: #e64a80;
+  --color-pink-soft: #ec7aa3;
+  --color-cyan: #3dd6e0;
+  --color-lime: #a3e635;
+  --color-amber: #f0a839;
+  --color-flame: #ec6a4a;
 
   --animate-float: float 6s ease-in-out infinite;
 
@@ -67,7 +67,7 @@ a:active {
   max-height: 560px;
   top: -12%;
   left: -18%;
-  background: radial-gradient(circle, rgba(255, 46, 126, 0.28), transparent 65%);
+  background: radial-gradient(circle, rgba(124, 58, 237, 0.16), transparent 65%);
 }
 
 .blob-2 {
@@ -77,7 +77,7 @@ a:active {
   max-height: 480px;
   top: 32%;
   right: -20%;
-  background: radial-gradient(circle, rgba(34, 230, 255, 0.2), transparent 65%);
+  background: radial-gradient(circle, rgba(61, 214, 224, 0.14), transparent 65%);
   animation-duration: 32s;
   animation-delay: -8s;
 }

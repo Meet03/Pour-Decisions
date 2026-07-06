@@ -128,7 +128,7 @@ export default function GuessWho() {
                 <p className="mt-4 max-w-xs text-sm text-white/40">"{prompt}"</p>
                 <button
                   onClick={() => setPrivacyShield(false)}
-                  className="mt-8 rounded-full bg-pink px-8 py-4 text-lg font-extrabold text-white shadow-xl shadow-pink/30 active:scale-95"
+                  className="mt-8 rounded-full bg-cyan px-8 py-4 text-lg font-extrabold text-night shadow-xl shadow-cyan/30 active:scale-95"
                 >
                   I'm ready to type 🙈
                 </button>
@@ -143,12 +143,12 @@ export default function GuessWho() {
                   maxLength={140}
                   rows={3}
                   autoFocus
-                  className="mt-4 w-full rounded-2xl border border-white/15 bg-white/5 px-4 py-3 text-base outline-none focus:border-pink"
+                  className="mt-4 w-full rounded-2xl border border-white/15 bg-white/5 px-4 py-3 text-base outline-none focus:border-cyan"
                 />
                 <button
                   onClick={submitAnswer}
                   disabled={!draft.trim()}
-                  className="mt-4 w-full rounded-full bg-pink py-3.5 font-extrabold text-white shadow-lg shadow-pink/30 active:scale-95 disabled:opacity-30"
+                  className="mt-4 w-full rounded-full bg-cyan py-3.5 font-extrabold text-night shadow-lg shadow-cyan/30 active:scale-95 disabled:opacity-30"
                 >
                   Lock in & pass along →
                 </button>
@@ -219,7 +219,7 @@ export default function GuessWho() {
             {guessedAuthor && (
               <button
                 onClick={nextAnswer}
-                className="mt-6 rounded-full bg-pink py-4 text-lg font-extrabold text-white shadow-xl shadow-pink/30 active:scale-95"
+                className="mt-6 rounded-full bg-cyan py-4 text-lg font-extrabold text-night shadow-xl shadow-cyan/30 active:scale-95"
               >
                 {revealIndex + 1 < shuffled.length ? 'Next answer →' : 'Finish 🏁'}
               </button>

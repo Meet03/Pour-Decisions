@@ -21,12 +21,12 @@ export default function PlayerManager() {
           placeholder="Add a player…"
           aria-label="Player name"
           maxLength={20}
-          className="min-w-0 flex-1 rounded-full border border-white/15 bg-white/5 px-5 py-3 text-base outline-none transition-colors placeholder:text-white/30 focus:border-pink"
+          className="min-w-0 flex-1 rounded-full border border-white/15 bg-white/5 px-5 py-3 text-base outline-none transition-colors placeholder:text-white/30 focus:border-cyan"
         />
         <button
           type="submit"
           aria-label="Add player"
-          className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-pink text-white shadow-lg shadow-pink/30 transition-transform active:scale-95"
+          className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-cyan text-night shadow-lg shadow-cyan/30 transition-transform active:scale-95"
         >
           <Plus className="h-6 w-6" />
         </button>

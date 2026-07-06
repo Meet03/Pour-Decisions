@@ -68,7 +68,7 @@ export default function TwoTruths() {
             <p className="mt-2 text-white/50">Think of 2 true statements and 1 lie about yourself.</p>
             <button
               onClick={() => setStage('writing')}
-              className="mt-8 rounded-full bg-pink px-8 py-4 text-lg font-extrabold text-white shadow-xl shadow-pink/30 active:scale-95"
+              className="mt-8 rounded-full bg-lime px-8 py-4 text-lg font-extrabold text-night shadow-xl shadow-lime/30 active:scale-95"
             >
               I'm ready 🤫
             </button>
@@ -107,7 +107,7 @@ export default function TwoTruths() {
                     }}
                     placeholder={`Statement ${i + 1}`}
                     maxLength={90}
-                    className="min-w-0 flex-1 rounded-full border border-white/15 bg-white/5 px-5 py-3 text-sm outline-none focus:border-pink"
+                    className="min-w-0 flex-1 rounded-full border border-white/15 bg-white/5 px-5 py-3 text-sm outline-none focus:border-lime"
                   />
                 </div>
               ))}
@@ -118,7 +118,7 @@ export default function TwoTruths() {
             <button
               onClick={lockIn}
               disabled={!statements.every((s) => s.trim()) || lieIndex === null}
-              className="mt-6 rounded-full bg-pink py-4 text-lg font-extrabold text-white shadow-xl shadow-pink/30 active:scale-95 disabled:opacity-30"
+              className="mt-6 rounded-full bg-lime py-4 text-lg font-extrabold text-night shadow-xl shadow-lime/30 active:scale-95 disabled:opacity-30"
             >
               Lock it in 🔒
             </button>
@@ -137,7 +137,7 @@ export default function TwoTruths() {
             <p className="mt-3 text-xl font-bold">Pass the phone back to the group!</p>
             <button
               onClick={() => setStage('guessing')}
-              className="mt-8 rounded-full bg-pink px-8 py-4 text-lg font-extrabold text-white shadow-xl shadow-pink/30 active:scale-95"
+              className="mt-8 rounded-full bg-lime px-8 py-4 text-lg font-extrabold text-night shadow-xl shadow-lime/30 active:scale-95"
             >
               We're ready 👀
             </button>
@@ -197,7 +197,7 @@ export default function TwoTruths() {
             ) : (
               <button
                 onClick={nextPlayer}
-                className="mt-6 rounded-full bg-pink py-4 text-lg font-extrabold text-white shadow-xl shadow-pink/30 active:scale-95"
+                className="mt-6 rounded-full bg-lime py-4 text-lg font-extrabold text-night shadow-xl shadow-lime/30 active:scale-95"
               >
                 Next player →
               </button>

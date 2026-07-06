@@ -15,7 +15,7 @@ export default function BottomDock({ onLeaderboard, onSettings }: BottomDockProp
     }`
 
   const activePill = (
-    <span className="sticker absolute inset-x-3 inset-y-1 -z-10 -rotate-1 rounded-2xl bg-pink" aria-hidden="true" />
+    <span className="sticker absolute inset-x-3 inset-y-1 -z-10 -rotate-1 rounded-2xl bg-cyan" aria-hidden="true" />
   )
 
   return (

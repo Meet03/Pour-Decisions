@@ -100,7 +100,7 @@ export default function Kings() {
         <button
           onClick={draw}
           disabled={deck.length === 0}
-          className="mt-6 w-full max-w-xs rounded-full bg-pink py-4 text-lg font-extrabold text-white shadow-xl shadow-pink/30 transition-transform active:scale-95 disabled:opacity-40"
+          className="mt-6 w-full max-w-xs rounded-full bg-flame py-4 text-lg font-extrabold text-night shadow-xl shadow-flame/30 transition-transform active:scale-95 disabled:opacity-40"
         >
           Draw a card 🃏
         </button>

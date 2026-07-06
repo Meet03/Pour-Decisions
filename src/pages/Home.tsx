@@ -21,19 +21,25 @@ export default function Home() {
     <div className="mx-auto min-h-dvh w-full max-w-lg pb-28 pt-8">
       {/* Banner */}
       <motion.div
-        initial={{ opacity: 0, y: 20, rotate: -2 }}
-        animate={{ opacity: 1, y: 0, rotate: -1 }}
+        initial={{ opacity: 0, y: 20, rotate: -1 }}
+        animate={{ opacity: 1, y: 0, rotate: -0.5 }}
         transition={{ duration: 0.5 }}
-        className="sticker relative mx-4 rounded-3xl bg-pink p-6 text-center"
+        className="sticker relative mx-4 overflow-hidden rounded-3xl bg-night-card p-6 text-center"
+        style={{
+          backgroundImage:
+            'radial-gradient(circle at 25% 15%, rgba(230,74,128,0.22), transparent 55%), radial-gradient(circle at 80% 85%, rgba(61,214,224,0.16), transparent 55%)',
+        }}
       >
-        <span className="doodle" style={{ top: '-14px', left: '6%', color: '#b6ff3c', fontSize: '26px' }} aria-hidden="true">
+        <span className="doodle" style={{ top: '-14px', left: '6%', color: '#a3e635', fontSize: '26px' }} aria-hidden="true">
           ✦
         </span>
-        <span className="doodle" style={{ top: '10px', right: '5%', color: '#22e6ff', fontSize: '18px', animationDelay: '-3s' }} aria-hidden="true">
+        <span className="doodle" style={{ top: '10px', right: '5%', color: '#3dd6e0', fontSize: '18px', animationDelay: '-3s' }} aria-hidden="true">
           ✳
         </span>
         <div className="animate-float text-6xl drop-shadow-[3px_3px_0_rgba(5,0,13,0.85)]">🍹</div>
-        <h1 className="text-sticker mt-2 text-4xl font-extrabold tracking-tight">Pour Decisions</h1>
+        <h1 className="mt-2 text-4xl font-extrabold tracking-tight">
+          Pour <span className="text-pink">Decisions</span>
+        </h1>
 
         {players.length === 0 ? (
           <Link
@@ -50,7 +56,7 @@ export default function Home() {
             <Crown className="h-4 w-4" /> {leader} leads with {leaderPts} pts
           </button>
         ) : (
-          <p className="mt-3 text-sm font-bold text-night/70">
+          <p className="mt-3 text-sm text-white/50">
             {players.length} player{players.length === 1 ? '' : 's'} ready — pick a game below 👇
           </p>
         )}
