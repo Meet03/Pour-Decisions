@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { AnimatePresence, motion } from 'framer-motion'
 import GameShell from '../components/GameShell'
+import PassThePhone from '../components/PassThePhone'
 import { guessWhoPrompts } from '../data/guessWhoPrompts'
 import { useGame } from '../context/GameContext'
 import { useScore } from '../context/ScoreContext'
@@ -122,17 +123,14 @@ export default function GuessWho() {
             className="mt-8 flex flex-1 flex-col items-center justify-center text-center"
           >
             {privacyShield ? (
-              <>
-                <p className="text-lg text-white/50">Pass the phone to</p>
-                <p className="mt-1 text-3xl font-extrabold text-pink">{players[collectorIndex]}</p>
-                <p className="mt-4 max-w-xs text-sm text-white/40">"{prompt}"</p>
-                <button
-                  onClick={() => setPrivacyShield(false)}
-                  className="mt-8 rounded-full bg-cyan px-8 py-4 text-lg font-extrabold text-night shadow-xl shadow-cyan/30 active:scale-95"
-                >
-                  I'm ready to type 🙈
-                </button>
-              </>
+              <PassThePhone
+                title="Pass the phone to"
+                name={players[collectorIndex]}
+                subtitle={`"${prompt}"`}
+                cta="I'm ready to type 🙈"
+                onReady={() => setPrivacyShield(false)}
+                accent="cyan"
+              />
             ) : (
               <div className="w-full">
                 <p className="text-sm text-white/50">{prompt}</p>

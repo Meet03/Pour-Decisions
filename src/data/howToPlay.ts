@@ -109,4 +109,23 @@ export const howToPlay: Record<string, HowToPlayInfo> = {
     ],
     scoring: 'The actor earns +2 for every movie the group correctly guesses. Nail 8 total across the night to unlock the 🎬 Charades Champ badge.',
   },
+  'family-feud': {
+    steps: [
+      'Split into two teams, Team A and Team B.',
+      'One person hosts each round (rotates automatically) — they hold the phone and see the hidden answer board.',
+      'A question appears. Whichever team shouts a matching answer first gets to control the board.',
+      'The host taps the matching answer to reveal it, or taps "Strike" if the guess doesn\'t match anything.',
+      '3 strikes hands the other team one steal attempt at the remaining points.',
+    ],
+    scoring: 'The controlling team banks the full board total if they clear it or survive to the end. If they strike out 3 times, the stealing team can grab the same points with one correct guess. Scores are local to this match and reset with the restart button.',
+  },
+  'emoji-pictionary': {
+    steps: [
+      'A string of emojis appears — everyone shouts guesses for the movie or phrase it represents.',
+      'Tap "Reveal answer" once someone gets it (or the group gives up).',
+      'Optionally tap the name of whoever guessed it first to award them points.',
+      'Tap "Next clue" to keep going.',
+    ],
+    scoring: 'Whoever gets credited for a correct guess earns +2 points. 5 correct guesses unlocks the 🔤 Emoji Master badge.',
+  },
 }

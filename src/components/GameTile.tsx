@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom'
+import { Users } from 'lucide-react'
 import type { GameMeta } from '../data/games'
 
 const fillMap: Record<string, string> = {
@@ -20,10 +21,16 @@ export default function GameTile({ game, index = 0 }: GameTileProps) {
   return (
     <Link
       to={`/${game.slug}`}
-      className={`sticker sticker-lift flex h-40 w-32 shrink-0 snap-start flex-col justify-between rounded-2xl p-3 text-night ${
+      className={`sticker sticker-lift relative flex h-40 w-32 shrink-0 snap-start flex-col justify-between rounded-2xl p-3 text-night ${
         fillMap[game.color] ?? 'bg-pink'
       } ${tilts[index % tilts.length]}`}
     >
+      <span
+        className="pointer-events-none absolute right-2 top-2 inline-flex items-center gap-1 rounded-full bg-night/70 px-1.5 py-0.5 text-[8px] font-bold text-white"
+        title={game.players}
+      >
+        <Users className="h-2.5 w-2.5" /> {game.players}
+      </span>
       <span className="wobble text-4xl" style={{ animationDelay: `${(index % 5) * -0.6}s` }}>
         {game.emoji}
       </span>

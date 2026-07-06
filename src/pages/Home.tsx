@@ -1,7 +1,7 @@
 import { useState } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { motion } from 'framer-motion'
-import { ArrowRight, Crown, UserPlus } from 'lucide-react'
+import { ArrowRight, Crown, Dice5, UserPlus } from 'lucide-react'
 import GameRow from '../components/GameRow'
 import Leaderboard from '../components/Leaderboard'
 import { games } from '../data/games'
@@ -13,9 +13,15 @@ export default function Home() {
   const { players } = useGame()
   const { getPoints } = useScore()
   const [showBoard, setShowBoard] = useState(false)
+  const navigate = useNavigate()
 
   const leader = players.length > 0 ? [...players].sort((a, b) => getPoints(b) - getPoints(a))[0] : null
   const leaderPts = leader ? getPoints(leader) : 0
+
+  function surpriseMe() {
+    const pick = games[Math.floor(Math.random() * games.length)]
+    navigate(`/${pick.slug}`)
+  }
 
   return (
     <div className="mx-auto min-h-dvh w-full max-w-lg pb-28 pt-8">
@@ -61,6 +67,17 @@ export default function Home() {
           </p>
         )}
       </motion.div>
+
+      {/* Surprise Me */}
+      <motion.button
+        onClick={surpriseMe}
+        initial={{ opacity: 0, y: 12 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.4, delay: 0.05 }}
+        className="mx-4 mt-4 flex items-center justify-center gap-2 rounded-2xl border-2 border-dashed border-white/25 bg-white/5 py-3.5 font-extrabold text-white/70 transition-colors hover:border-flame/60 hover:text-white"
+      >
+        <Dice5 className="h-5 w-5 text-flame" /> Surprise me! 🎲
+      </motion.button>
 
       {/* Game rows */}
       <div className="mt-8">

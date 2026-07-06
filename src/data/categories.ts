@@ -23,11 +23,16 @@ export const gameCategories: GameCategory[] = [
   {
     title: 'Quick Fire',
     emoji: '⚡',
-    slugs: ['this-or-that', 'category-blitz', 'hot-seat'],
+    slugs: ['this-or-that', 'category-blitz', 'hot-seat', 'emoji-pictionary'],
   },
   {
     title: 'Showtime',
     emoji: '🎬',
     slugs: ['charades'],
+  },
+  {
+    title: 'Team Battles',
+    emoji: '🏆',
+    slugs: ['family-feud'],
   },
 ]

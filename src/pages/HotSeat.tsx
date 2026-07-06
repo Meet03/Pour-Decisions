@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from 'react'
 import GameShell from '../components/GameShell'
+import PassThePhone from '../components/PassThePhone'
 import PopNumber from '../components/PopNumber'
 import { hotSeatQuestions } from '../data/hotSeatQuestions'
 import { useGame } from '../context/GameContext'
@@ -81,48 +82,54 @@ export default function HotSeat() {
   return (
     <GameShell title="Hot Seat" emoji="💺" slug="hot-seat">
       <div className="mt-6 flex flex-1 flex-col items-center text-center">
-        <p className="text-lg">
-          <span className="font-extrabold text-pink">{player}</span> is in the hot seat
-        </p>
-
-        <p className="mt-4 text-5xl font-extrabold">
-          <PopNumber value={seconds} />s
-        </p>
-
-        {running ? (
-          <>
-            <div className="mt-6 flex min-h-[140px] w-full items-center justify-center rounded-3xl border border-white/10 bg-night-card p-6">
-              <p className="text-xl font-bold leading-snug">{deck[qIndex]}</p>
-            </div>
-            <p className="mt-2 text-xs text-white/40">Answered: {answered}</p>
-            <button
-              onClick={nextQuestion}
-              disabled={seconds === 0}
-              className="mt-5 w-full rounded-full bg-pink py-4 text-lg font-extrabold text-white shadow-xl shadow-pink/30 active:scale-95 disabled:opacity-40"
-            >
-              Next question →
-            </button>
-          </>
-        ) : seconds === 0 ? (
-          <>
-            <p className="mt-4 text-xl font-extrabold text-flame">⏰ Time's up!</p>
-            <p className="mt-1 text-white/50">
-              {player} answered {answered} question{answered === 1 ? '' : 's'} (+{answered} pts)
-            </p>
-            <button
-              onClick={nextPlayer}
-              className="mt-6 w-full rounded-full bg-pink py-4 text-lg font-extrabold text-white shadow-xl shadow-pink/30 active:scale-95"
-            >
-              Next player →
-            </button>
-          </>
+        {!running && seconds === ROUND_SECONDS ? (
+          <PassThePhone
+            title="Pass the phone to"
+            name={player}
+            subtitle="They're in the hot seat! Everyone else, get your questions ready."
+            cta="Start the clock ⏱️"
+            onReady={start}
+            accent="pink"
+          />
         ) : (
-          <button
-            onClick={start}
-            className="mt-8 w-full rounded-full bg-pink py-4 text-lg font-extrabold text-white shadow-xl shadow-pink/30 active:scale-95"
-          >
-            Start the clock ⏱️
-          </button>
+          <>
+            <p className="text-lg">
+              <span className="font-extrabold text-pink">{player}</span> is in the hot seat
+            </p>
+
+            <p className="mt-4 text-5xl font-extrabold">
+              <PopNumber value={seconds} />s
+            </p>
+
+            {running ? (
+              <>
+                <div className="mt-6 flex min-h-[140px] w-full items-center justify-center rounded-3xl border border-white/10 bg-night-card p-6">
+                  <p className="text-xl font-bold leading-snug">{deck[qIndex]}</p>
+                </div>
+                <p className="mt-2 text-xs text-white/40">Answered: {answered}</p>
+                <button
+                  onClick={nextQuestion}
+                  disabled={seconds === 0}
+                  className="mt-5 w-full rounded-full bg-pink py-4 text-lg font-extrabold text-night shadow-xl shadow-pink/30 active:scale-95 disabled:opacity-40"
+                >
+                  Next question →
+                </button>
+              </>
+            ) : (
+              <>
+                <p className="mt-4 text-xl font-extrabold text-flame">⏰ Time's up!</p>
+                <p className="mt-1 text-white/50">
+                  {player} answered {answered} question{answered === 1 ? '' : 's'} (+{answered} pts)
+                </p>
+                <button
+                  onClick={nextPlayer}
+                  className="mt-6 w-full rounded-full bg-pink py-4 text-lg font-extrabold text-night shadow-xl shadow-pink/30 active:scale-95"
+                >
+                  Next player →
+                </button>
+              </>
+            )}
+          </>
         )}
       </div>
     </GameShell>

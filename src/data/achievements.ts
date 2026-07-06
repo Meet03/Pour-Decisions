@@ -8,6 +8,7 @@ export interface PlayerStats {
   thisOrThatWins: number
   blitzWins: number
   charades: number
+  emojiWins: number
 }
 
 export function emptyStats(): PlayerStats {
@@ -21,6 +22,7 @@ export function emptyStats(): PlayerStats {
     thisOrThatWins: 0,
     blitzWins: 0,
     charades: 0,
+    emojiWins: 0,
   }
 }
 
@@ -41,6 +43,7 @@ export const achievements: Achievement[] = [
   { id: 'quick-draw', label: 'Quick Draw', emoji: '⚡', check: (s) => s.thisOrThatWins >= 5 },
   { id: 'wordsmith', label: 'Wordsmith', emoji: '📝', check: (s) => s.blitzWins >= 3 },
   { id: 'charades-champ', label: 'Charades Champ', emoji: '🎬', check: (s) => s.charades >= 8 },
+  { id: 'emoji-master', label: 'Emoji Master', emoji: '🔤', check: (s) => s.emojiWins >= 5 },
 ]
 
 export function badgesFor(stats: PlayerStats): Achievement[] {

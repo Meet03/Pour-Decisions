@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { AnimatePresence, motion } from 'framer-motion'
 import GameShell from '../components/GameShell'
+import PassThePhone from '../components/PassThePhone'
 import { useGame } from '../context/GameContext'
 import { useScore } from '../context/ScoreContext'
 
@@ -126,22 +127,15 @@ export default function TwoTruths() {
         )}
 
         {stage === 'reveal-ready' && (
-          <motion.div
+          <PassThePhone
             key="reveal-ready"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            className="mt-10 flex flex-1 flex-col items-center justify-center text-center"
-          >
-            <p className="text-3xl">🤐</p>
-            <p className="mt-3 text-xl font-bold">Pass the phone back to the group!</p>
-            <button
-              onClick={() => setStage('guessing')}
-              className="mt-8 rounded-full bg-lime px-8 py-4 text-lg font-extrabold text-night shadow-xl shadow-lime/30 active:scale-95"
-            >
-              We're ready 👀
-            </button>
-          </motion.div>
+            title="Pass the phone back to"
+            name={null}
+            subtitle="The whole group — time to guess the lie!"
+            cta="We're ready 👀"
+            onReady={() => setStage('guessing')}
+            accent="lime"
+          />
         )}
 
         {(stage === 'guessing' || stage === 'revealed') && (

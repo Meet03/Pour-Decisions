@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from 'react'
 import { AnimatePresence, motion } from 'framer-motion'
 import GameShell from '../components/GameShell'
 import HoloCard from '../components/HoloCard'
+import PassThePhone from '../components/PassThePhone'
 import PopNumber from '../components/PopNumber'
 import { charadeMovies, type CharadeLang } from '../data/charades'
 import { useGame } from '../context/GameContext'
@@ -152,25 +153,15 @@ export default function Charades() {
         )}
 
         {stage === 'privacy' && (
-          <motion.div
+          <PassThePhone
             key="privacy"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            className="mt-10 flex flex-1 flex-col items-center justify-center text-center"
-          >
-            <p className="text-3xl">🙈</p>
-            <p className="mt-3 max-w-xs text-lg font-bold">
-              Only {player} should look at the next screen!
-            </p>
-            <p className="mt-1 text-sm text-white/40">Everyone else: get ready to guess.</p>
-            <button
-              onClick={startRound}
-              className="mt-8 rounded-full bg-lime px-8 py-4 text-lg font-extrabold text-night shadow-xl shadow-lime/30 active:scale-95"
-            >
-              Start the clock ⏱️
-            </button>
-          </motion.div>
+            title="Pass the phone to"
+            name={player}
+            subtitle="Only they should look! Everyone else: get ready to guess."
+            cta="Start the clock ⏱️"
+            onReady={startRound}
+            accent="lime"
+          />
         )}
 
         {stage === 'acting' && currentMovie && (

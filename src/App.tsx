@@ -15,6 +15,8 @@ import ThisOrThat from './pages/ThisOrThat'
 import CategoryBlitz from './pages/CategoryBlitz'
 import HotSeat from './pages/HotSeat'
 import Charades from './pages/Charades'
+import FamilyFeud from './pages/FamilyFeud'
+import EmojiPictionary from './pages/EmojiPictionary'
 import GameEventToast from './components/GameEventToast'
 import BottomDock from './components/BottomDock'
 import Leaderboard from './components/Leaderboard'
@@ -67,6 +69,8 @@ export default function App() {
               <Route path="/category-blitz" element={<CategoryBlitz />} />
               <Route path="/hot-seat" element={<HotSeat />} />
               <Route path="/charades" element={<Charades />} />
+              <Route path="/family-feud" element={<FamilyFeud />} />
+              <Route path="/emoji-pictionary" element={<EmojiPictionary />} />
               <Route path="*" element={<Home />} />
             </Routes>
           </motion.div>
